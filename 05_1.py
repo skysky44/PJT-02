@@ -1,36 +1,19 @@
 import requests
 from pprint import pprint
+import t04  # 모듈명숫자로 시작하면 안됨 04.py를 t04로 변경해서 해야함
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-def search_movie(title):
-
-    BASE_URL = 'https://api.themoviedb.org/3'
-    path = '/search/movie'
-    params = {
-        'api_key': os.getenv('api_key'),
-        'language': 'ko-KR',
-        'region': 'KR',
-        'query': title
-    }
-
-    response = requests.get(BASE_URL+path, params=params).json()
-    if response['results'] == []:
-        return None
-    else:
-        return response['results'][0]['id']
-
-
 def recommendation(title):
 
-    movie_id = search_movie(title)  # 다른 함수의 결과값을 이용하기 위해서는 함수를 실생시켜야 한다.
+    movie_id = t04.search_movie(title)  # 모듈로 다른 파일의 함수 사용하기
     BASE_URL = 'https://api.themoviedb.org/3'
     path = f'/movie/{movie_id}/recommendations'
     params = {
-        'api_key': '329eece8bd11e0cf9158d9060529cb42',
+        'api_key': os.getenv('api_key'),
         'language': 'ko-KR',
         'region': 'KR'
     }

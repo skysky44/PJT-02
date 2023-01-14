@@ -1,3 +1,4 @@
+# 파일명이 숫자이면 모듈이 안돼서 이름 변경한 파일
 import requests
 from pprint import pprint
 import os
